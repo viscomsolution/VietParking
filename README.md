@@ -10,13 +10,15 @@ Source code phần mềm giữ xe nhỏ gọn với các tính năng cơ bản c
 - Phân quyền người dùng: nhân viên và Admin. Admin có quyền setup camera, password database...
 - Quản lý thẻ: thêm thẻ, báo mất thẻ (khóa thẻ), reset thẻ
 
-## Yêu cầu kỹ thuật
+## Đặc tính kỹ thuật và yêu cầu hệ thống
+- Viết bằng ngôn ngữ C#
 - Chạy trên PC windows 10
 - Camera IP các hãng: Ezviz, Hikvison, Vivotek, Vantech, KBvision.
 - Đầu đọc thẻ Mifare SCL011
 - Thẻ Mifare classic 13.56Mhz
 - Cài đặt [.Net Framework 4.7.2](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
-- Cài đặt [C++ redistributable 2015 x86](https://www.microsoft.com/en-us/download/details.aspx?id=48145) tùy phiên bản bạn chọn.
+- Cài đặt [C++ redistributable 2015 x86](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
+- Build bằng Visual Studio 2017 trở lên
 
 ## Hướng dẫn sử dụng
 - Tài khoản đăng nhập là **admin**, password là **admin**
