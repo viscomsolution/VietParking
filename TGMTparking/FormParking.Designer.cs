@@ -160,7 +160,6 @@
             this.danhSáchThẻToolStripMenuItem.Name = "danhSáchThẻToolStripMenuItem";
             this.danhSáchThẻToolStripMenuItem.Size = new System.Drawing.Size(120, 25);
             this.danhSáchThẻToolStripMenuItem.Text = "Danh sách thẻ";
-            this.danhSáchThẻToolStripMenuItem.Click += new System.EventHandler(this.danhSáchThẻToolStripMenuItem_Click);
             // 
             // nhânViênToolStripMenuItem
             // 

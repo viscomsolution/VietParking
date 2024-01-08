@@ -1,5 +1,4 @@
-﻿using IPSS;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,9 +12,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using TGMT;
 using TGMTcs;
 using TGMTparking.DBmgr;
-using TGMTparking.Module;
 using TGMTparking.UI;
 using TGMTplayer.Controls;
 
@@ -198,8 +197,7 @@ namespace TGMTparking
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            ConnectCardReader();            
+        {   
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,30 +282,6 @@ namespace TGMTparking
             txt_plate1.Location = new Point((panel1.Width / 2) - (txt_plate1.Width / 2),  pictureBox1_1.Location.Y + pictureBox1_1.Height + 10);
             txt_plate2.Location = new Point((panel2.Width / 2) - (txt_plate2.Width / 2), pictureBox2_1.Location.Y + pictureBox2_1.Height + 10);
 
-        }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private void ConnectCardReader()
-        {
-            bool connected = CardReaderMgr.GetInstance().ConnectToCardReader();
-            if(connected)
-            {
-                lbl_cardReader.Text = "Card reader: YES |";
-                CardReaderMgr.GetInstance().onCardAppear += OnCardAppearHandler;
-            }
-            else
-            {
-                lbl_cardReader.Text = "Card reader: NO |";
-                lbl_cardReader.ForeColor = Color.Red;
-            }
-        }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private void OnCardAppearHandler(object sender, BoardEventArgs e)
-        {
-            this.Invoke(new Action(() => { OnCardAppear(e.cardID); }));
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -415,16 +389,6 @@ namespace TGMTparking
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private void danhSáchThẻToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CardReaderMgr.GetInstance().onCardAppear -= OnCardAppearHandler;
-            FormCard frm = new FormCard();
-            frm.ShowDialog();
-            CardReaderMgr.GetInstance().onCardAppear += OnCardAppearHandler;
-        }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormUser frm = new FormUser();
@@ -494,7 +458,7 @@ namespace TGMTparking
 
 
                 //đọc biển số xe
-                BikePlate plate = ANPRmgr.GetInstance().ReadBikePlate(bmpBack);
+                PlateInfo plate = ANPRmgr.GetInstance().ReadPlate(bmpBack);
                 if(plate != null)
                 {
                     txtPlateIn.Text = plate.text;
@@ -617,7 +581,7 @@ namespace TGMTparking
                     picOutBack.Image = bmpBack;
 
                     //đọc biển số xe
-                    BikePlate plate = ANPRmgr.GetInstance().ReadBikePlate(bmpBack);
+                    PlateInfo plate = ANPRmgr.GetInstance().ReadPlate(bmpBack);
                     if (plate != null)
                     {
                         txtPlateOut.Text = plate.text;

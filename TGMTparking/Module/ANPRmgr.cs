@@ -4,15 +4,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IPSS;
+using TGMT;
 using TGMTcs;
 
 namespace TGMTparking
 {
     class ANPRmgr
     {
-        IPSSbike ipssbike; //đọc biển số xe máy
-        IPSScar ipsscar;  //đọc biển số xe hơi (oto)
+        PlateReader ipss; //đọc biển số xe máy & xe hơi (oto) 
 
         static ANPRmgr m_instance;
 
@@ -34,7 +33,7 @@ namespace TGMTparking
             CropPlate = TGMTini.GetInstance().ReadBool("crop_plate", "Common");
 
 
-            ipssbike = new IPSSbike();
+            ipss = new PlateReader();
             //ipsscar.CropResultImage = CropPlate;            
         }
 
@@ -55,33 +54,17 @@ namespace TGMTparking
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public BikePlate ReadBikePlate(Bitmap bmp)
+        public PlateInfo ReadPlate(Bitmap bmp)
         {
             if (bmp == null)
-                return new BikePlate();
+                return new PlateInfo();
             try
             {
-                return ipssbike.ReadPlate(bmp);
+                return ipss.Read(bmp);
             }
             catch
             {
-                return new BikePlate();
-            }
-        }
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public CarPlate ReadCarPlate(Bitmap bmp)
-        {
-            if (bmp == null)
-                return new CarPlate();
-            try
-            {
-                return ipsscar.ReadPlate(bmp);
-            }
-            catch
-            {
-                return new CarPlate();
+                return new PlateInfo();
             }
         }
 
